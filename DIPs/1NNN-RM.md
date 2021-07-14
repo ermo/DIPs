@@ -63,8 +63,7 @@ The compiler front-ends will need to be modified to recognize the new @-versions
 
 The "nothrow" and "pure" keywords that are only attributes could be deprecated if the tradeoff is not considered intractable. Another option is to keep the old keywords but remove their documentation in favour of the @-attributes.
 
-To aid in this transition a tool could be constructed on top of the lexer contained in the [D-Scanner project](https://github.com/dlang-community/D-Scanner). Because this is only a keyword substitution, the chances of this tool failing are incredibly low. All whitespace, comments, and other formatting will be preserved by this tool. The construction of this tool is considered optional as a simple search and 
-replace with checks for corner cases could also be fit for purpose.
+To aid in this transition, the [dfix tool](https://github.com/dlang-community/dfix) -- which already supports DIP64 -- could be leveraged to add support for the changes proposed in the present DIP. Because this is only a keyword substitution, the chances of this tool failing are incredibly low. All whitespace, comments, and other formatting will be preserved by this tool. The dfix tool changes are considered optional as a simple search and replace with checks for corner cases could also be fit for purpose.
 
 Various documentation (including the Dlang tour) will need to be updated to reflect this change.
 
@@ -72,26 +71,9 @@ Various documentation (including the Dlang tour) will need to be updated to refl
 
 Section 3.5 [Attributes](https://dlang.org/spec/grammar.html#attributes) changes:
 
-```
+```diff
 Attribute:
-     LinkageAttribute
-     AlignAttribute
-     DeprecatedAttribute
-     VisibilityAttribute
-     Pragma
-     static
-     extern
-     abstract
-     final
-     override
-     synchronized
-     auto
-     scope
-     const
-     immutable
-     inout
-     shared
-     __gshared
+     (...)
      AtAttribute
 -    FunctionAttributeKwd
      ref
@@ -119,7 +101,7 @@ At the end of the deprecation period, code using the old keyword attributes will
 
 Hence a fairly long deprecation period might be necessary to allow stakeholders to update existing code bases as appropriate.
 
-The proposed tool could help mitigate the cost this update imposes on existing code bases.
+The dfix tool could help mitigate the cost this update imposes on existing code bases.
 
 ## Copyright & License
 
