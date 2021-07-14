@@ -59,11 +59,12 @@ This DIP is based on [DIP64](https://wiki.dlang.org/DIP64) (some text is copied 
 
 ## Description
 
-The compiler front-ends will need to be modified to recognize the new @-versions of the attributes as equivalent to their old non-@-versions (e.g. "@pure" is equivalent to "pure"). This could be achieved via suitable aliases.
+The compiler front-ends will need to be modified to recognize the new @-versions of the attributes as equivalent to their old non-@-versions (e.g. "@pure" is equivalent to "pure").
 
-Keywords that are only attributes (i.e. they are not also storage classes or type constructors) will be need to be deprecated.
+The "nothrow" and "pure" keywords that are only attributes could be deprecated if the tradeoff is not considered intractable. Another option is to keep the old keywords but remove their documentation in favour of the @-attributes.
 
-To aid in this transition a tool could be constructed on top of the lexer contained in the [D-Scanner project](https://github.com/dlang-community/D-Scanner). Because this is only a keyword substitution, the chances of this tool failing are incredibly low. All whitespace, comments, and other formatting will be preserved by this tool. The construction of this tool is considered optional.
+To aid in this transition a tool could be constructed on top of the lexer contained in the [D-Scanner project](https://github.com/dlang-community/D-Scanner). Because this is only a keyword substitution, the chances of this tool failing are incredibly low. All whitespace, comments, and other formatting will be preserved by this tool. The construction of this tool is considered optional as a simple search and 
+replace with checks for corner cases could also be fit for purpose.
 
 Various documentation (including the Dlang tour) will need to be updated to reflect this change.
 
